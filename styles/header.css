@@ -90,6 +90,7 @@
     padding: 2.5rem;
     box-shadow: 3px 3px 10px 3px #7f7f7f;
     border-radius: 15px;
+    position: relative;
   }
   .name-review{
     font-size: 1.5rem;
@@ -97,16 +98,34 @@
     margin-bottom: .25rem;
     font-weight: bold;
   }
-  .place-review{
-    color: red;
-    font-style: italic;
-  }
 
   .desc-review{
     line-height: 1.5rem;
     letter-spacing: 1px;
     color: rgb(93, 92, 92);
   }
+
+  .button-rev{
+    position:absolute;
+    right:0;
+    top:0;
+    font-size: 25px;
+    background-color: transparent;
+    border: none;
+    padding:8px;
+    padding-top:5px;
+    border-radius: 12px;
+  }
+  .button-rev:hover{
+    background-color:rgb(255, 1, 1);
+    color: white;
+  }
+
+  .deleteClass{
+    display: none;
+  }
+
+  
   
   @media (max-width: 678px){
     .review{

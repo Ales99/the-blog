@@ -25,7 +25,7 @@
         <div class="reviews" id="reviews"></div>
         
       
-<script src="createBlog.js"></script>
+<script src="index.js"></script>
         
 </body>
 </html>

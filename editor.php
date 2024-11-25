@@ -15,7 +15,6 @@
      <div class="blog">
         <div class="head">
         <textarea type="text" class="title" placeholder="your Name..." name="username"></textarea>
-        <textarea type="text" class="title" placeholder="your Country..." name="place"></textarea>
     </div>
     <textarea type="text" class="article" placeholder="Start writing..." name="desc"></textarea>
     </div>
@@ -35,13 +34,12 @@
    
         if(isset($_POST["publish"])){
             $name = filter_input(INPUT_POST,"username",FILTER_SANITIZE_SPECIAL_CHARS);
-            $place = filter_input(INPUT_POST,"place",FILTER_SANITIZE_SPECIAL_CHARS);
             $description = filter_input(INPUT_POST,"desc",FILTER_SANITIZE_SPECIAL_CHARS);
-            if(empty($name)|| empty($place)||empty($description)){
+            if(empty($name)||empty($description)){
                 echo"<script>alert(`fill all fields`)</script>";
             }
-            else{$sql = "INSERT INTO `user` (`ID`, `Name`, `Country`, `Desc`) 
-                    VALUES (NULL, '$name', '$place', '$description')";
+            else{$sql = "INSERT INTO `user` (`ID`, `Name`, `Desc`) 
+                    VALUES (NULL, '$name', '$description')";
             mysqli_query($conn,$sql);
             
             header("location:index.php");}

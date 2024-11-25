@@ -1,6 +1,6 @@
 <?php
     include("config.php");
-    $sql = "SELECT `Name`, `Country`, `Desc` 
+    $sql = "SELECT * 
             FROM `user`";
     $data = mysqli_query($conn,$sql);
     $json_data = array();
