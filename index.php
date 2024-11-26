@@ -11,7 +11,7 @@
         <div class="header">
             <h2>The <span style="color: orange; font-size: 40px; font-family: ink free; font-weight: bold;">B</span>log</h2>
             <div class="navBar">
-                <li>Home</li>
+                <li onclick="createRandomQuote()">Generate a Quote</li>
                 <li id="redirectB">Create <span style="color: orange; font-family: ink free; font-size: 30px">B</span>log</li>
             </div> </div>
             

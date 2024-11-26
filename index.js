@@ -8,7 +8,7 @@ function createB(id,name,desc){
    let buttonBox = document.createElement("button");//create a delete button
    buttonBox.innerHTML = "&#128465";
    buttonBox.classList.add("button-rev");
-   buttonBox.onclick = ()=>deleteBox(id);//adding the function to delete
+   buttonBox.onclick = ()=>deleteData(id);//adding the function to delete
    let bodyBox = document.createElement("div");//create div to add the name and desc
    bodyBox.classList.add("body-review");
    bodyBox.appendChild(nameBox);
@@ -22,7 +22,7 @@ function createB(id,name,desc){
       reviews.appendChild(revBox);
 }
 
-function deleteBox(id){//delete function
+function deleteData(id){//delete function
     const xhr = new XMLHttpRequest();
    
         xhr.open("POST","config files/delete.php",true);
@@ -31,7 +31,6 @@ function deleteBox(id){//delete function
             if(xhr.readyState == 4 && xhr.status == 200){
                 let response = JSON.parse(xhr.responseText)
                 if(response.success){
-                    console.log("done");
                     document.getElementById(id).remove();
                 }
                 
@@ -49,18 +48,48 @@ redirect.addEventListener("click",()=>{
 
 function receiveData(){//to receive data from database
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "config files/action.php",true);
+    xhr.open("POST", "config files/getData.php",true);
     xhr.onload = ()=>{
         if(xhr.status == 200 && xhr.readyState == 4){
-            const data = JSON.parse(xhr.response);
-            
-            
+            const data = JSON.parse(xhr.response);   
             for(let i = data.length - 1;i>=0;i--){
                 createB( data[i].ID,data[i].Name,data[i].Desc);
             }
         }
     }
     xhr.send();
+}
+
+async function createRandomQuote(){//generate a random breaking bad quote
+    const apiUrl = 'https://api.breakingbadquotes.xyz/v1/quotes';//api url to be fetched
+    try{
+        let response = await fetch(apiUrl);//fetching the api and waiting
+    if(!response.ok){
+        throw new Error('Failed to get response')
+    }
+    const data = await response.json();
+    let name = data[0].author;
+    let desc = data[0].quote;
+    let xhr = new XMLHttpRequest();//create ajax to send the data
+    xhr.open('POST','config files/insert.php',true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange= ()=>{
+        if(xhr.readyState == 4 && xhr.status == 200){
+            console.log(xhr.responseText);
+        }
+    };
+        let newData = `username=${encodeURIComponent(name)}
+        &desc=${encodeURIComponent(desc)}
+        &insert=Publish`;//create data to pass them to the php page
+        xhr.send(newData);
+        location.reload();//to reload the page after done
+    
+    
+    }
+    catch(error){
+        console.error(error);
+    }
+    
 }
 
 receiveData();
