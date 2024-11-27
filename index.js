@@ -22,6 +22,7 @@ function createB(id,name,desc){
       reviews.appendChild(revBox);
 }
 
+
 function deleteData(id){//delete function
     const xhr = new XMLHttpRequest();
    

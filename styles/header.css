@@ -3,6 +3,9 @@
     margin: 0;
     padding: 0;
   }
+  body{
+    user-select: none;
+  }
   .header{
     display: flex;
     justify-content: space-between;
@@ -75,7 +78,7 @@
     margin: 0 1rem;
     min-width: 300px;
     flex: 1;
-  
+    user-select:text;
   }
   
   .head-review{
