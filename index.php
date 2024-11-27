@@ -18,9 +18,9 @@
     <div class="rev-section">
         
         <h2 class="title">Welcome to The <span style="color: orange; font-family: ink free; font-size: 70px">B</span>log</h2>
-        <!-- <p class="note">This website is designed so you could share your thoughts
+        <p class="note">This website is designed so you could share your thoughts
             and ideas without being afraid of people's discrimination.Enjoy!!
-        </p> -->
+        </p>
         
         <div class="reviews" id="reviews"></div>
         
