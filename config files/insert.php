@@ -1,16 +1,20 @@
 <?php
+session_start();
        include("config.php");
-        if(isset($_POST["insert"])){
-            $name = filter_input(INPUT_POST,"username",FILTER_SANITIZE_SPECIAL_CHARS);
-            $description = filter_input(INPUT_POST,"desc",FILTER_SANITIZE_SPECIAL_CHARS);
-            if(empty($name)||empty($description)){
-                echo"<script>alert(`fill all fields`)</script>";
+        if(isset($_POST["submit"])){
+            extract($_POST);
+            if(empty($content)){
+                header("Location: ../pages/posts.page.php?error=emptyfield");
+                exit();
             }
-            else{$sql = "INSERT INTO `user` (`ID`, `Name`, `Desc`) 
-                    VALUES (NULL, '$name', '$description')";
-            mysqli_query($conn,$sql);
-            header("location: ../index.php");
-    }
+            $userid = $_SESSION['user_id'];
+            $sql = "INSERT INTO `description`(`desc_id`, `content`, `u_id`) VALUES ('NULL','$content','$userid')";
+            if(!$conn->query($sql)){
+                header("Location: ../pages/posts.page.php?error=statementfailed");
+                exit();
+            }
+            header("Location: ../pages/posts.page.php");
+
         }
     mysqli_close($conn);
 ?>

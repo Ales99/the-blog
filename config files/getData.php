@@ -1,18 +1,13 @@
 <?php
-    include("config.php");
-    $sql = "SELECT * 
-            FROM `user`";
-    $data = mysqli_query($conn,$sql);
-    $json_data = array();
-    
-    if(mysqli_num_rows($data)>0){
-    while($row = mysqli_fetch_assoc($data)){
-        $json_data[] =  $row;
-    
-    }
 
-    echo json_encode($json_data);  
-}
+    include("config.php");
+    
+    $userId = $_SESSION['user_id'];
+    $sql = "SELECT * FROM `description` WHERE u_id = '$userId'";
+    $data = $conn->query($sql);
+    
+    
+    
 
 
     mysqli_close($conn);

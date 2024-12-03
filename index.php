@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +15,23 @@
         <div class="header">
             <h2>The <span style="color: orange; font-size: 40px; font-family: ink free; font-weight: bold;">B</span>log</h2>
             <div class="navBar">
-                <li onclick="createRandomQuote()">Generate a Quote</li>
-                <li id="redirectB">Create <span style="color: orange; font-family: ink free; font-size: 30px">B</span>log</li>
+                <?php 
+                if(!isset($_SESSION['user_id'])){
+                    ?>
+                    <li id="redirectB"><a href="pages/login.page.php">Login</a></li>  
+                <?php
+                }
+                else{
+                ?>
+                    <li><a href="pages/posts.page.php">Your Posts</a></li>
+                    <li>Welcome back <?=$_SESSION['username']?></li>
+                    <li><a href="config files/logout.php">LOGOUT</a></li>
+                    <?php
+                    }
+                    ?>
+
+
+                
             </div> </div>
             
     <div class="rev-section">
@@ -21,8 +40,29 @@
         <p class="note">This website is designed so you could share your thoughts
             and ideas without being afraid of people's discrimination.Enjoy!!
         </p>
+        <div class="reviews" id="reviews">
+            
+            <?php
+            include "config files/config.php";
+            $sql= "SELECT username,content FROM `users`,`description` WHERE u_id = id;";
+            $data = $conn->query($sql);
+            if($data->num_rows>0){
+                while($row = $data->fetch_assoc()){
+            ?> 
+            <div class="review">
+                <div class="body-review">
+                    <div class="name-review"><?=$row['username'] ?> :</div>
+                    <div class="desc-review"><?=$row['content']?></div>
+                </div>
+            </div>
+            <?php 
+                }
+            }
+            ?> 
         
-        <div class="reviews" id="reviews"></div>
+        </div>
+        
+</div>
         
       
 <script src="index.js"></script>
