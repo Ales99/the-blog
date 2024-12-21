@@ -8,7 +8,7 @@ if(isset($_POST['submit'])){
         exit();
     }
     if($result->num_rows == 0){
-        header("Location: ../pages/login.page.php?error:Wrongpassword");
+        header("Location: ../pages/login.page.php?error:usernotfounf");
         exit();
     }
     else{
@@ -25,6 +25,7 @@ if(isset($_POST['submit'])){
         session_start();
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
+        $_SESSION['isAdmin'] = $user['isAdmin'];
         header("Location: ../index.php");
     }
     }

@@ -1,5 +1,5 @@
 <?php
-session_start()
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +46,7 @@ session_start()
         <div class="reviews" id="reviews">
             
             <?php
-            include "../config files/getData.php";
+            include "../config files/getDataForOneUser.php";
             if($data->num_rows>0){
                 while($row = $data->fetch_assoc()){
             ?> 

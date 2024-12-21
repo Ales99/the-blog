@@ -18,3 +18,4 @@ let redirect = document.getElementById("redirectB");
 redirect.addEventListener("click",()=>{
     window.location.href="editor.php";
 })
+

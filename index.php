@@ -23,8 +23,19 @@ session_start();
                 }
                 else{
                 ?>
-                    <li><a href="pages/posts.page.php">Your Posts</a></li>
-                    <li>Welcome back <?=$_SESSION['username']?></li>
+                    
+                    <?php
+                    if($_SESSION['isAdmin'] == 1){
+                    echo "<li>Welcome back Admin</li>";
+                       echo "<li><a href='  config files/displayUsers.php'>Admin page</a></li>";
+                    }
+                    else{
+                        echo "<li>Welcome back ".$_SESSION['username']."</li>";
+                        echo"<li><a href='pages/posts.page.php'>Your Posts</a></li>";
+                    }
+
+                    ?>
+                    
                     <li><a href="config files/logout.php">LOGOUT</a></li>
                     <?php
                     }
@@ -44,7 +55,7 @@ session_start();
             
             <?php
             include "config files/config.php";
-            $sql= "SELECT username,content FROM `users`,`description` WHERE u_id = id;";
+            $sql= "SELECT username,content,desc_id FROM `users`,`description` WHERE u_id = id;";
             $data = $conn->query($sql);
             if($data->num_rows>0){
                 while($row = $data->fetch_assoc()){
@@ -53,7 +64,13 @@ session_start();
                 <div class="body-review">
                     <div class="name-review"><?=$row['username'] ?> :</div>
                     <div class="desc-review"><?=$row['content']?></div>
+                    <?php
+                    if(isset($_SESSION['isAdmin'])&&$_SESSION['isAdmin'] == 1){
+                    echo"<button class='button-rev'><a href='config files/delete.php?id=".$row['desc_id']."'>🗑</a></button>";
+                }
+                ?>
                 </div>
+
             </div>
             <?php 
                 }
