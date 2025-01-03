@@ -31,7 +31,7 @@ if($_SESSION['isAdmin'] == 0){
 
 <div class="rev-section">
     <input onkeyup='searchUser(this.value)' class='input' type='text' placeholder='Search user'>
-    <div id="123" class="usersTable"></div>
+    <div id="userTable" class="usersTable"></div>
 </div>
 
 
@@ -45,10 +45,11 @@ if($_SESSION['isAdmin'] == 0){
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.status == 200 && xhr.readyState == 4) {
-            document.getElementById("123").innerHTML = xhr.responseText;
+            document.getElementById("userTable").innerHTML = xhr.responseText;
         }
     };
     xhr.open("GET", "showUserspagi.php?page=" + pageNum+"&q="+character, true);
+
     xhr.send();
 }
 

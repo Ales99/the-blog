@@ -75,6 +75,11 @@ session_start();
             <?php 
                 }
             }
+            else{
+                echo "<div class='review'>";
+                echo "<h2 class='title'>No posts yet</h2>";
+                echo "</div>";
+            }
             ?> 
         
         </div>
